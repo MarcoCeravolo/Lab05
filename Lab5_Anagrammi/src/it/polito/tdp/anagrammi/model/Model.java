@@ -37,23 +37,52 @@ public class Model {
 		return num;
 	}*/
 	
-	public void ricorsivo(String parziale, int livello, String parola){ 
+//	public void ricorsivo(String parziale, int livello, String parola){ 
+//		
+//		if(parziale.length() == parola.length()){
+//			this.addAnagramma(parziale);
+//		}
+//		
+//		for (int i=0; i<parola.length(); i++){
+//			if(!parziale.contains(""+parola.charAt(i))){
+//				// B
+//				parziale+=parola.charAt(i);
+//				// C
+//				ricorsivo(parziale, livello+1, parola);
+//				// D
+//				parziale = parziale.substring(0, parziale.length()-1);
+//			}
+//		}
+//		
+//	}
+	
+	public void ricorsivo(String parziale, int livello, String parola){
 		
-		if(parziale.length() >= parola.length()){
+		if(livello == parola.length() && !anagrammi.contains(parziale)){
 			this.addAnagramma(parziale);
+			return;
 		}
 		
-		for (int i=0; i<parola.length(); i++){
-			if(!parziale.contains(""+parola.charAt(i))){
-				// B
+		for(int i=0; i<parola.length(); i++){
+			if(charCounter(parziale, parola.charAt(i))< charCounter(parola, parola.charAt(i))){
 				parziale+=parola.charAt(i);
-				// C
 				ricorsivo(parziale, livello+1, parola);
-				// D
-				parziale = parziale.substring(0, parziale.length()-1);
+				parziale = parziale.substring(0,parziale.length()-1);
 			}
 		}
-		
+					
+	}
+	
+	private static int charCounter(String string, char c){
+		int count = 0;
+	    for (int i=0; i < string.length(); i++)
+	    {
+	        if (string.charAt(i) == c)
+	        {
+	             count++;
+	        }
+	    }
+	    return count;
 	}
 	
 	public void risolvi(String parola){
